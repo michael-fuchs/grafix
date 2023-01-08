@@ -1,6 +1,7 @@
 package mifu.grafix.graph;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class GraphNode {
@@ -36,6 +37,21 @@ public class GraphNode {
 
   public int getLocationY() {
     return locationY;
+  }
+
+  /**
+   * Returns a comparator that compares the distance of two nodes to this node.
+   * It allows to sort all nodes of the graph nodes by distance int the view of this node.
+   */
+  public Comparator<GraphNode> distanceComparator() {
+    return (n1, n2) -> distance(n1) - distance(n2);
+  }
+
+  /**
+   * Returns the distance of the given node to this node.
+   */
+  public int distance(GraphNode node) {
+    return (int) Math.sqrt(Math.pow(locationX - node.getLocationX(), 2) + Math.pow(locationY - node.getLocationY(), 2));
   }
 
   @Override
